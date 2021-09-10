@@ -1,3 +1,5 @@
 /jpa-basic-pdf
 
 jpa-basic-pdf.*
+
+**/target/**
