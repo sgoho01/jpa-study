@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : Gunho.Song
@@ -38,8 +39,17 @@ public class JpaMain {
             em.remove(findMember);*/
 
             // update code
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("helloJpa");
+            /*Member findMember = em.find(Member.class, 1L);
+            findMember.setName("helloJpa");*/
+
+            // jpql
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                    .setFirstResult(5)
+                    .setMaxResults(8)
+                    .getResultList();
+            for (Member member : result) {
+                System.out.println("member = " + member.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
